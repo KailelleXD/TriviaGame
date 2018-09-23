@@ -1,0 +1,29 @@
+/* font-family: 'Crushed', cursive;
+font-family: 'Share Tech Mono', monospace; */
+
+body {
+    background-image: url("https://picsum.photos/1920/1080");
+    max-width: 1080px;
+    margin: auto;
+}
+
+h2 {
+    font-size: 200%;
+}
+
+h3 {
+    font-size: 175%;
+}
+
+h4 {
+    font-size: 150%;
+}
+
+#title {
+    font-family: 'Crushed', cursive;
+}
+
+#mainContent,
+#timer {
+    font-family: 'Share Tech Mono', monospace;
+}

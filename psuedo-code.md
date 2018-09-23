@@ -1,57 +1,104 @@
-### Option One: CrystalsCollector Game (Recommended)
+### Option Two: Advanced Assignment (Timed Questions)
 
-![Crystal Collector](Images/1-CrystalCollector.jpg)
+![Advanced](Images/2-advanced.jpg)
 
-1. [Watch the demo](https://youtu.be/yNI0l2FMeCk).
+**[Click Here to Watch the demo](https://youtu.be/xhmmiRmxQ8Q)**.
 
-2. The player will have to guess the answer, just like in Word Guess. This time, though, the player will guess with numbers instead of letters. 
+* You'll create a trivia game that shows only one question until the player answers it or their time runs out.
 
-3. Here's how the app works:
+* If the player selects the correct answer, show a screen congratulating them for choosing the right option. After a few seconds, display the next question -- do this without user input.
 
-   * There will be four crystals displayed as buttons on the page.
+* The scenario is similar for wrong answers and time-outs.
 
-   * The player will be shown a random number at the start of the game.
+  * If the player runs out of time, tell the player that time's up and display the correct answer. Wait a few seconds, then show the next question.
+  * If the player chooses the wrong answer, tell the player they selected the wrong option and then display the correct answer. Wait a few seconds, then show the next question.
 
-   * When the player clicks on a crystal, it will add a specific amount of points to the player's total score. 
+* On the final screen, show the number of correct answers, incorrect answers, and an option to restart the game (without reloading the page).
 
-     * Your game will hide this amount until the player clicks a crystal.
-     * When they do click one, update the player's score counter.
+### Reminder: Submission on BCS
 
-   * The player wins if their total score matches the random number from the beginning of the game.
+* Please submit both the deployed Github.io link to your homework AND the link to the Github Repository!
 
-   * The player loses if their score goes above the random number.
+- - -
 
-   * The game restarts whenever the player wins or loses.
+### Minimum Requirements
 
-     * When the game begins again, the player should see a new random number. Also, all the crystals will have four new hidden values. Of course, the user's score (and score counter) will reset to zero.
+Attempt to complete homework assignment as described in instructions. If unable to complete certain portions, please pseudocode these portions to describe what remains to be completed. Adding a README.md as well as adding this homework to your portfolio are required as well and more information can be found below.
 
-   * The app should show the number of games the player wins and loses. To that end, do not refresh the page as a means to restart the game.
+- - -
 
-   ##### Option 1 Game design notes
+### Create a README.md
 
-* The random number shown at the start of the game should be between 19 - 120.
+Add a `README.md` to your repository describing the project. Here are some resources for creating your `README.md`. Here are some resources to help you along the way:
 
-* Each crystal should have a random hidden value between 1 - 12.
+* [About READMEs](https://help.github.com/articles/about-readmes/)
+
+* [Mastering Markdown](https://guides.github.com/features/mastering-markdown/)
+
+- - -
+
+### Add To Your Portfolio
+
+After completing the homework please add the piece to your portfolio. Make sure to add a link to your updated portfolio in the comments section of your homework so the TAs can easily ensure you completed this step when they are grading the assignment. To receive an 'A' on any assignment, you must link to it from your portfolio.
+
+- - -
+
+### A Few Last Notes
+
+* Styling and theme are completely up to you. Get creative!
+
+* Remember to deploy your assignment to Github Pages.
+
+*If you have any questions about this project or the material we have covered, please post them in the community channels in slack so that your fellow developers can help you! If you're still having trouble, you can come to office hours for assistance from your instructor and TAs.
+
+  **Good Luck!**
+-----
+
+Game Steps:
+
+Splash/Title Screen. w/music. Countdown to start! (Title: No time to think!)
+First question appears on the screen next to a 10 second timer.
+
+3 possible outcomes:
+
+Player gets the answer correct: Screen appears that says congratulations; after 3 seconds the next questions appears.
+Player runs out of time: Display the words, "Outta Time!"; after 3 seconds the next question appears.
+Player chooses the wrong answer: Display, "Sorry wrong answer!"; after a second, display the answer below the msg. After 3 seconds move on to the next question.
+After going through all 10 questions we display the final score screen
+  Must show:
+      Correct answers
+      Incorrect answers
+      and an option to restart (without reloading the page)
+
+Screens to wireframe:
+
+  title screen
+  question screen
+    correct answer screen
+    wrong answer screen
+    Time Up screen
+    Final score screen
+    
 
 -----
 
 Pseudo-code/Steps:
 
-1. [x] Wireframe on paper, what I would like this game to look like based on the specifications that have been presented to me.
+1. [] Wireframe on paper, what I would like this game to look like based on the specifications that have been presented to me.
 
-2. [x] Create the basic HTML structure so that I can begin to mainpulate the DOM through the use of jQuery.
+2. [] Create the basic HTML structure so that I can begin to mainpulate the DOM through the use of jQuery.
 
 3. (Make a personal effort to really keep your code organized!)
 
-4. [x]Think about what variables I'm going to need for this game. Write them down.
+4. []Think about what variables I'm going to need for this game. Write them down.
 
-5. [x]Think about different functions and how they might be arranged. Write those down.
+5. []Think about different functions and how they might be arranged. Write those down.
 
-6. [x]Psuedo-code the structure for the game-code.
+6. []Psuedo-code the structure for the game-code.
 
-7. [x]Write the code.
+7. []Write the code.
 
-8. [x]test/debug/test/debug.
+8. []test/debug/test/debug.
 
 9. Once game is at it's most basic finish status, read and consider to implement any bonus material either stated within the instructions or otherwise.
 
