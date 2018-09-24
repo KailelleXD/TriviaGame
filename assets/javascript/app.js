@@ -153,6 +153,7 @@ function startCountdown() {
         if (countdown <= 0) {
             clearInterval(intervalId);
             targetTimer.css("color", "red");
+            
         } ///if statement
 
     }, 1000); ///var intervalId = setInterval(function() {});
