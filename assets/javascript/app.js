@@ -156,12 +156,12 @@ function startCountdown() {
 
     }, 1000); ///var intervalId = setInterval(function() {});
 
-} ///startCountdown();
+} ///FINISHED - startCountdown();
 
 // Generates a random number to determine the question for each round.
 function randomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
-} ///var randomNumber = getRandomInt(max);
+} ///FINISHED - var randomNumber = getRandomInt(max);
 
 // Resets the game and all values back to the initial starting conditions.
 function resetGame() {
@@ -179,7 +179,7 @@ function randomIntCheck(num) {
         console.log("questionsAsked has been incremented to: " + questionsAsked);
         return false;  
     }
-} ///randomIntCheck();
+} ///FINISHED - randomIntCheck();
 
 // Switch statement that displays a random question from the myQuestion Array.
 function questionPicker() {
@@ -260,7 +260,7 @@ function questionPicker() {
             targetAnswer4.html(myQuestions[9].answers.d);
             break;
     }
-} ///questionPicker();
+} ///FINISHED - questionPicker();
 
 //------------------------------------------------------------------------//
 //Diagnostic-tools                                                        //
