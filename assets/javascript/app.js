@@ -62,7 +62,7 @@ const myQuestions = [
         correctAnswer: "b"
     },
     { // Question 6 - index[5] ////
-        question: "What item/s are currently sitting on headboard of my bed",
+        question: "What item/s are currently sitting on headboard of my bed?",
         answers: {
             a: "Tsum Tsums",
             b: "The book, 'Harry Potter and the Chamber of Secrets.'",
@@ -168,40 +168,25 @@ function resetGame() {
 } ///resetGame();
 
 // Checks to determine if randomInt picked a number that's already been picked.
-function randomIntCheck() {
-
+function randomIntCheck(num) {
+    console.log("function randomIntCheck has been called");
+    var randomNumberArrCheck = randomNumberArr.includes(num);
+    if (randomNumberArrCheck === true) {
+        return true;
+    } else {
+        randomNumberArr.push(num);
+        questionsAsked++;
+        console.log("questionsAsked has been incremented to: " + questionsAsked);
+        return false;  
+    }
 } ///randomIntCheck();
 
 // Switch statement that displays a random question from the myQuestion Array.
 function questionPicker() {
-    var randomNumber = randomInt(9);
-    var randomNumberArrCheck = randomNumberArr.includes(randomNumber);
-    while (randomNumberArrCheck === true && questionsAsked < 10) {
-        console.log("randomInt picked a number already picked!")
-        randomNumber = randomInt(9);
-        console.log("New number is: " + randomNumber);
-        randomNumberArrCheck = false;
-        console.log("randomNumberArrCheck: " + randomNumberArrCheck);
-        randomNumberArr.push(randomNumber);
-        questionsAsked++;
-        console.log("questionsAsked incremented to: " + questionsAsked);
-    }
-
-    if (questionsAsked === 10) {
-        console.log("All questions have been asked");
-    } else if (randomNumberArr.includes(randomNumber) === false) {
-        randomNumberArr.push(randomNumber);
-        questionsAsked++;
-        console.log("questionsAsked incremented to: " + questionsAsked);
-        console.log("The number randomInt picked: " + randomNumber + " has been pushed into the array randomNumberArr")
-    }
-    
-    
-    
-    
-    
-    
-    
+    do {
+        var randomNumber = randomInt(10);
+        var randomNumberValue = randomIntCheck(randomNumber);
+    } while (randomNumberValue === true && questionsAsked < 10);     
     
     switch(randomNumber) {
         case 0:
@@ -284,7 +269,11 @@ function consoleClickCheck() {                                            //
         console.log("Diagnostic-tool----------");
         clickCount++;
         console.log("clickCount: " + clickCount);
-        questionPicker();
+        if (questionsAsked < 10) {
+            questionPicker();
+        } else {
+            console.log("All questions have been asked!");
+        }
         console.log(randomNumberArr);
         console.log("-------------------------");   
     })
