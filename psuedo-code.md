@@ -84,15 +84,15 @@ Screens to wireframe:
 
 Pseudo-code/Steps:
 
-1. [] Wireframe on paper, what I would like this game to look like based on the specifications that have been presented to me.
+1. [x] Wireframe on paper, what I would like this game to look like based on the specifications that have been presented to me.
 
-2. [] Create the basic HTML structure so that I can begin to mainpulate the DOM through the use of jQuery.
+2. [x] Create the basic HTML structure so that I can begin to mainpulate the DOM through the use of jQuery.
 
 3. (Make a personal effort to really keep your code organized!)
 
-4. []Think about what variables I'm going to need for this game. Write them down.
+4. [x]Think about what variables I'm going to need for this game. Write them down.
 
-5. []Think about different functions and how they might be arranged. Write those down.
+5. [x]Think about different functions and how they might be arranged. Write those down.
 
 6. []Psuedo-code the structure for the game-code.
 
