@@ -4,6 +4,10 @@ $(document).ready(function() {
 var countdown = 10;
 var correct = 0;
 var wrong = 0;
+var questionsAsked = 0;
+var clickCount = 0; // Temporary variable to check how many questions were asked (Using the diagnostic-tool)
+
+var randomNumberArr = [];
 
 // Array of Objects containing Questions, Answers, and Correct Answers ////
 const myQuestions = [
@@ -123,48 +127,166 @@ targetQuestion = $("#question");
 targetAnswer1 = $("#answer1");
 targetAnswer2 = $("#answer2");
 targetAnswer3 = $("#answer3");
-targetAmswer4 = $("#answer4");
+targetAnswer4 = $("#answer4");
 targetInfoPanel = $("#infoPanel");
 targetInfoTimerPanel = $("#infoTimerPanel");
 targetTimer = $("#timer");
 targetSeconds = $("#seconds");
 
 // Function Declarations ////
-// Starts the countdown, calls displayCountdown(); to refresh timer till it reaches 0.
+// Starts the countdown, updates the display every second, and calls clearInterval if countdown = 0.
 function startCountdown() {
+
     countdown = 10;
+    targetSeconds.html(countdown);
+
     // intervalId for 10 second countdown.
     var intervalId = setInterval(function() {
-        displayCountdown();
-        console.log(countdown);
-        countdown--;
-    }, 1000);
+        countdown--; // decrements the variable countdown.
+
+        if (countdown < 10) {
+            targetSeconds.html("0" + countdown);
+        } else {
+            targetSeconds.html(countdown);
+        } ///if-else statement
+        
+        if (countdown <= 0) {
+            clearInterval(intervalId);
+        } ///if statement
+
+    }, 1000); ///var intervalId = setInterval(function() {});
+
 } ///startCountdown();
 
-// Updates the div/span for the timer to reflect any changes to the counter.
-function displayCountdown(interval) {
-    targetSeconds.html(countdown);
-    if (countdown <= 0) {
-        clearInterval(interval);
-        console.log("clearInterval has run, countdown should be stopped");
-    }
-} ///displayCountdown();
-
 // Generates a random number to determine the question for each round.
-function randomInt() {
-} ///randomInt();
+function randomInt(max) {
+    return Math.floor(Math.random() * Math.floor(max));
+} ///var randomNumber = getRandomInt(max);
 
-// When clicked resets the game and all values back to the initial starting conditions.
+// Resets the game and all values back to the initial starting conditions.
 function resetGame() {
 } ///resetGame();
+
+// Checks to determine if randomInt picked a number that's already been picked.
+function randomIntCheck() {
+
+} ///randomIntCheck();
+
+// Switch statement that displays a random question from the myQuestion Array.
+function questionPicker() {
+    var randomNumber = randomInt(9);
+    var randomNumberArrCheck = randomNumberArr.includes(randomNumber);
+    while (randomNumberArrCheck === true && questionsAsked < 10) {
+        console.log("randomInt picked a number already picked!")
+        randomNumber = randomInt(9);
+        console.log("New number is: " + randomNumber);
+        randomNumberArrCheck = false;
+        console.log("randomNumberArrCheck: " + randomNumberArrCheck);
+        randomNumberArr.push(randomNumber);
+        questionsAsked++;
+        console.log("questionsAsked incremented to: " + questionsAsked);
+    }
+
+    if (questionsAsked === 10) {
+        console.log("All questions have been asked");
+    } else if (randomNumberArr.includes(randomNumber) === false) {
+        randomNumberArr.push(randomNumber);
+        questionsAsked++;
+        console.log("questionsAsked incremented to: " + questionsAsked);
+        console.log("The number randomInt picked: " + randomNumber + " has been pushed into the array randomNumberArr")
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    switch(randomNumber) {
+        case 0:
+            targetQuestion.html(myQuestions[0].question);
+            targetAnswer1.html(myQuestions[0].answers.a);
+            targetAnswer2.html(myQuestions[0].answers.b);
+            targetAnswer3.html(myQuestions[0].answers.c);
+            targetAnswer4.html(myQuestions[0].answers.d);
+            break;
+        case 1:
+            targetQuestion.html(myQuestions[1].question);
+            targetAnswer1.html(myQuestions[1].answers.a);
+            targetAnswer2.html(myQuestions[1].answers.b);
+            targetAnswer3.html(myQuestions[1].answers.c);
+            targetAnswer4.html(myQuestions[1].answers.d);
+            break;
+        case 2:
+            targetQuestion.html(myQuestions[2].question);
+            targetAnswer1.html(myQuestions[2].answers.a);
+            targetAnswer2.html(myQuestions[2].answers.b);
+            targetAnswer3.html(myQuestions[2].answers.c);
+            targetAnswer4.html(myQuestions[2].answers.d);
+            break;
+        case 3:
+            targetQuestion.html(myQuestions[3].question);
+            targetAnswer1.html(myQuestions[3].answers.a);
+            targetAnswer2.html(myQuestions[3].answers.b);
+            targetAnswer3.html(myQuestions[3].answers.c);
+            targetAnswer4.html(myQuestions[3].answers.d);
+            break;
+        case 4:
+            targetQuestion.html(myQuestions[4].question);
+            targetAnswer1.html(myQuestions[4].answers.a);
+            targetAnswer2.html(myQuestions[4].answers.b);
+            targetAnswer3.html(myQuestions[4].answers.c);
+            targetAnswer4.html(myQuestions[4].answers.d);            
+            break;
+        case 5:
+            targetQuestion.html(myQuestions[5].question);
+            targetAnswer1.html(myQuestions[5].answers.a);
+            targetAnswer2.html(myQuestions[5].answers.b);
+            targetAnswer3.html(myQuestions[5].answers.c);
+            targetAnswer4.html(myQuestions[5].answers.d);
+            break;
+        case 6:
+            targetQuestion.html(myQuestions[6].question);
+            targetAnswer1.html(myQuestions[6].answers.a);
+            targetAnswer2.html(myQuestions[6].answers.b);
+            targetAnswer3.html(myQuestions[6].answers.c);
+            targetAnswer4.html(myQuestions[6].answers.d);
+            break;
+        case 7:
+            targetQuestion.html(myQuestions[7].question);
+            targetAnswer1.html(myQuestions[7].answers.a);
+            targetAnswer2.html(myQuestions[7].answers.b);
+            targetAnswer3.html(myQuestions[7].answers.c);
+            targetAnswer4.html(myQuestions[7].answers.d);
+            break;
+        case 8:
+            targetQuestion.html(myQuestions[8].question);
+            targetAnswer1.html(myQuestions[8].answers.a);
+            targetAnswer2.html(myQuestions[8].answers.b);
+            targetAnswer3.html(myQuestions[8].answers.c);
+            targetAnswer4.html(myQuestions[8].answers.d);
+            break;
+        case 9:
+            targetQuestion.html(myQuestions[9].question);
+            targetAnswer1.html(myQuestions[9].answers.a);
+            targetAnswer2.html(myQuestions[9].answers.b);
+            targetAnswer3.html(myQuestions[9].answers.c);
+            targetAnswer4.html(myQuestions[9].answers.d);
+            break;
+    }
+} ///questionPicker();
 
 //------------------------------------------------------------------------//
 //Diagnostic-tools                                                        //
 function consoleClickCheck() {                                            //
     $(document).on("click", function() {
         console.log("Diagnostic-tool----------");
-        console.log(countdown);
-        console.log("-------------------------");
+        clickCount++;
+        console.log("clickCount: " + clickCount);
+        questionPicker();
+        console.log(randomNumberArr);
+        console.log("-------------------------");   
     })
 } ///function to console.log on each click.                                //
 consoleClickCheck(); // Comment-in this line to use the above function.//
@@ -175,8 +297,8 @@ consoleClickCheck(); // Comment-in this line to use the above function.//
 ///////////////////////
 
 // Main Code Starts Here. ////
+startCountdown();
 
-startCountdown(intervalId); 
 
 
 
