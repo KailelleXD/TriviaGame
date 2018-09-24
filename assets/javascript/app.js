@@ -1,9 +1,11 @@
+$(document).ready(function() {
+
 // Global Variables / Arrays ////
 var countdown = 10;
 var correct = 0;
 var wrong = 0;
 
-// Array of possible Questions and potential Answers ////
+// Array of Objects containing Questions, Answers, and Correct Answers ////
 const myQuestions = [
     { // Question 1 - index[0] ////
         question: "Color?",
@@ -46,17 +48,17 @@ const myQuestions = [
         correctAnswer: "b"
     },
     { // Question 5 - index[4] ////
-        question: "If Barry got home yesterday and 3 days before two weeks from today was his birthday, what day was it when Barry got home?",
+        question: "If O'shea got home yesterday and 3 days before two weeks from today was his friend's birthday, what day was it when he got home?",
         answers: {
             a: "huh?",
-            b: "It was a good day.",
+            b: "I don't know, but it was a good day.",
             c: "Clearly it was Tuesday!",
             d: "Can you really consider this a fair question?"
         },
         correctAnswer: "b"
     },
     { // Question 6 - index[5] ////
-        question: "What item/s are currently sitting on my bed's headboard?",
+        question: "What item/s are currently sitting on headboard of my bed",
         answers: {
             a: "Tsum Tsums",
             b: "The book, 'Harry Potter and the Chamber of Secrets.'",
@@ -66,46 +68,46 @@ const myQuestions = [
         correctAnswer: "d"
     },
     { // Question 7 - index[6] ////
-        question: "",
+        question: "A food truck sells salads for $6.50 each and drinks for $2.00 each. The food truck's revenue from selling a total of 209 salads and drinks in one dday was $836.50. How many salads were sold that day?",
         answers: {
-            a: "",
-            b: "",
-            c: "",
-            d: ""
+            a: "77",
+            b: "93",
+            c: "99",
+            d: "105"
         },
-        correctAnswer: ""
+        correctAnswer: "b"
     },
     { // Question 8 - index[7] ////
-        question: "",
+        question: "On Saturday afternoon, Armand sent m text messages each hour for 5 hours, and Tyrone sent p text messages each hour for 4 hours. Which of the following represents the total number of messages sent by Armand and Tyrone on Saturday afternoon?",
         answers: {
-            a: "",
-            b: "",
-            c: "",
-            d: ""
+            a: "Why do you care so much about Armand and Tyrone?",
+            b: "20mp",
+            c: "5m + 4p",
+            d: "4m + 5p"
         },
-        correctAnswer: ""
+        correctAnswer: "c"
     },
     { // Question 9 - index[8] ////
-        question: "",
+        question: "Did you find this quiz to be entertaining and useful in some kind of random way?",
         answers: {
-            a: "",
-            b: "",
-            c: "",
-            d: ""
+            a: "The answer is always, 'Yes.' (Except when it isn't)",
+            b: "I haven't technically finished the quiz yet.",
+            c: "I guess.",
+            d: "Yes."
         },
-        correctAnswer: ""
+        correctAnswer: "d"
     },
     { // Question 10 - index[9] ////
-        question: "",
+        question: "How much wood could a woodchuck chuck if a woodchuck could chuck wood?",
         answers: {
-            a: "",
-            b: "",
-            c: "",
-            d: ""
+            a: "Sorry I don't work in hypotheticals.",
+            b: "According to NY State wildlife expert Richard Thomas; if a woodchuck could chuck wood, it'd probably be around 700 pounds.",
+            c: "Yes?",
+            d: "January 20th 1992."
         },
-        correctAnswer: ""
+        correctAnswer: "b"
     },
-];
+]; ///Array myQuestions
 
 // Boolean Variables ////
 var answer1 = false;
@@ -125,18 +127,57 @@ targetAmswer4 = $("#answer4");
 targetInfoPanel = $("#infoPanel");
 targetInfoTimerPanel = $("#infoTimerPanel");
 targetTimer = $("#timer");
+targetSeconds = $("#seconds");
 
 // Function Declarations ////
-// Starts 30 second countdown for each new round.
+// Starts the countdown, calls displayCountdown(); to refresh timer till it reaches 0.
 function startCountdown() {
-} // startCountdown();
+    countdown = 10;
+    // intervalId for 10 second countdown.
+    var intervalId = setInterval(function() {
+        displayCountdown();
+        console.log(countdown);
+        countdown--;
+    }, 1000);
+} ///startCountdown();
+
+// Updates the div/span for the timer to reflect any changes to the counter.
+function displayCountdown(interval) {
+    targetSeconds.html(countdown);
+    if (countdown <= 0) {
+        clearInterval(interval);
+        console.log("clearInterval has run, countdown should be stopped");
+    }
+} ///displayCountdown();
 
 // Generates a random number to determine the question for each round.
 function randomInt() {
-} // randomInt();
+} ///randomInt();
 
 // When clicked resets the game and all values back to the initial starting conditions.
 function resetGame() {
-} // resetGame();
+} ///resetGame();
+
+//------------------------------------------------------------------------//
+//Diagnostic-tools                                                        //
+function consoleClickCheck() {                                            //
+    $(document).on("click", function() {
+        console.log("Diagnostic-tool----------");
+        console.log(countdown);
+        console.log("-------------------------");
+    })
+} ///function to console.log on each click.                                //
+consoleClickCheck(); // Comment-in this line to use the above function.//
+//------------------------------------------------------------------------//
+
+////Diagnostic-tool////
+// consoleClickCheck();
+///////////////////////
 
 // Main Code Starts Here. ////
+
+startCountdown(intervalId); 
+
+
+
+}); ///$(document).ready(function() {});
