@@ -133,7 +133,11 @@ targetInfoTimerPanel = $("#infoTimerPanel");
 targetTimer = $("#timer");
 targetSeconds = $("#seconds");
 
+
+//-----------------------////
 // Function Declarations ////
+//-----------------------////
+
 // Starts the countdown, updates the display every second, and calls clearInterval if countdown = 0.
 function startCountdown() {
     targetTimer.css("color", "black");
@@ -254,6 +258,7 @@ function randomIntCheck(num) {
     }
 } ///FINISHED - randomIntCheck();
 
+// Enables click-functionality for answers and assigns a corresponding answer letter to usersChoice.
 function questionEnable() {
     console.log("questionEnable function called");
 
@@ -376,7 +381,11 @@ function questionPicker() {
     startCountdown();
 } ///FINISHED - questionPicker();
 
+
+//-------------////
 // Page-States ////
+//-------------////
+
 // On event, changes the html of targetMainContent to timesUp screen.
 function gameRestart() {
     console.log("gameRestart function called");
