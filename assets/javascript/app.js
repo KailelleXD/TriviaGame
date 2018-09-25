@@ -5,7 +5,9 @@ var countdown = 10;
 var correct = 0;
 var wrong = 0;
 var questionsAsked = 0;
-var clickCount = 0; // Temporary variable to check how many questions were asked (Using the diagnostic-tool)
+var currentAnswer;
+var storedAnswer;
+var usersChoice = "";
 
 var randomNumberArr = [];
 
@@ -115,10 +117,7 @@ const myQuestions = [
 
 // Boolean Variables ////
 var gameStatus = false;
-var answer1 = false;
-var answer2 = false;
-var answer3 = false;
-var answer4 = false;
+var questionScreen = false;
 
 // Target IDs ////
 targetTitlePanel = $("#titlePanel");
@@ -141,16 +140,16 @@ function startCountdown() {
     console.log("startCountdown function called");
     countdown = 10; // Use this for normal game function.
     // countdown = 1; // Use this for debug.
-    targetSeconds.html(countdown);
+    $("#seconds").html(countdown);
 
     // intervalId for 10 second countdown.
     var intervalId = setInterval(function() {
         countdown--; // decrements the variable countdown.
 
         if (countdown < 10) {
-            targetSeconds.html("0" + countdown);
+            $("#seconds").html("0" + countdown);
         } else {
-            targetSeconds.html(countdown);
+            $("#seconds").html(countdown);
         } ///if-else statement
         
         if (countdown <= 0) {
@@ -162,6 +161,7 @@ function startCountdown() {
             if (gameStatus === false) {
                 gameStatus = true;
                 nextQuestion();
+                // finalScore(); // Use this to debug ending screen
             } else {
                 timesUp();
             }
@@ -171,7 +171,18 @@ function startCountdown() {
             finalScore();
         }
 
+        //if-else statement for correct and wrong choices
+        if (usersChoice === currentAnswer && questionScreen === true && usersChoice != "") {
+        clearInterval(intervalId);
+        correctAnswer();
+        } else if (usersChoice !== currentAnswer && questionScreen === true && usersChoice != "") {
+        clearInterval(intervalId);
+        wrongAnswer();
+        } ///if-else statement
+
     }, 1000); ///var intervalId = setInterval(function() {});
+
+
 
 } ///FINISHED - startCountdown();
 
@@ -181,26 +192,29 @@ function shortCountdown() {
     targetTimer.css("color", "black");
     countdown = 3; // Use this for normal game function.
     // countdown = 1; // Use this for debug.
-    targetSeconds.html("0" + countdown);
+    $("#seconds").html("0" + countdown);
 
     // intervalId for 10 second countdown.
     var intervalId = setInterval(function() {
         countdown--; // decrements the variable countdown.
 
         if (countdown < 10) {
-            targetSeconds.html("0" + countdown);
+            $("#seconds").html("0" + countdown);
         } else {
-            targetSeconds.html(countdown);
+            $("#seconds").html(countdown);
         } ///if-else statement
         
         if (countdown <= 0) {
             targetTimer.css("color", "red");
         } ///if statement
 
-        if (countdown < 0) {
+        if (countdown < 0 && questionsAsked < 10) {
             clearInterval(intervalId);
             nextQuestion();
-        } ///if statement
+        } else if (countdown < 0 && questionsAsked === 10) {
+            clearInterval(intervalId);
+            finalScore();
+        }
 
     }, 1000); ///var intervalId = setInterval(function() {});
 
@@ -213,9 +227,17 @@ function randomInt(max) {
 } ///FINISHED - var randomNumber = getRandomInt(max);
 
 // Resets the game and all values back to the initial starting conditions.
-function resetGame() {
+function restartGame() {
     console.log("resetGame function called");
-} ///resetGame();
+    $("#restart").on("click", function() {
+        console.log("You clicked the reset button!");
+        correct = 0;
+        wrong = 0;
+        questionsAsked = 0;
+        gameStatus = false;
+        gameRestart();
+    });
+} ///FINISHED - resetGame();
 
 // Checks to determine if randomInt picked a number that's already been picked.
 function randomIntCheck(num) {
@@ -230,6 +252,25 @@ function randomIntCheck(num) {
         return false;  
     }
 } ///FINISHED - randomIntCheck();
+
+function questionEnable() {
+    console.log("questionEnable function called");
+
+    $("#answer1, #answer2, #answer3, #answer4").css("cursor", "pointer");
+
+    $("#answer1").on("click", function() {
+        usersChoice = "a";
+    });
+    $("#answer2").on("click", function() {
+        usersChoice = "b";
+    });
+    $("#answer3").on("click", function() {
+        usersChoice = "c";
+    });
+    $("#answer4").on("click", function() {
+        usersChoice = "d";
+    });
+} ///FINISHED - questionEnable();
 
 // Switch statement that displays a random question from the myQuestion Array.
 function questionPicker() {
@@ -246,6 +287,8 @@ function questionPicker() {
             $("#answer2").html(myQuestions[0].answers.b);
             $("#answer3").html(myQuestions[0].answers.c);
             $("#answer4").html(myQuestions[0].answers.d);
+            currentAnswer = myQuestions[0].correctAnswer;
+            storedAnswer = myQuestions[0].answers[currentAnswer];
             break;
         case 1:
             $("#question").html(myQuestions[1].question);
@@ -253,6 +296,8 @@ function questionPicker() {
             $("#answer2").html(myQuestions[1].answers.b);
             $("#answer3").html(myQuestions[1].answers.c);
             $("#answer4").html(myQuestions[1].answers.d);
+            currentAnswer = myQuestions[1].correctAnswer;
+            storedAnswer = myQuestions[1].answers[currentAnswer];
             break;
         case 2:
             $("#question").html(myQuestions[2].question);
@@ -260,6 +305,8 @@ function questionPicker() {
             $("#answer2").html(myQuestions[2].answers.b);
             $("#answer3").html(myQuestions[2].answers.c);
             $("#answer4").html(myQuestions[2].answers.d);
+            currentAnswer = myQuestions[2].correctAnswer;
+            storedAnswer = myQuestions[2].answers[currentAnswer];
             break;
         case 3:
             $("#question").html(myQuestions[3].question);
@@ -267,6 +314,8 @@ function questionPicker() {
             $("#answer2").html(myQuestions[3].answers.b);
             $("#answer3").html(myQuestions[3].answers.c);
             $("#answer4").html(myQuestions[3].answers.d);
+            currentAnswer = myQuestions[3].correctAnswer;
+            storedAnswer = myQuestions[3].answers[currentAnswer];
             break;
         case 4:
             $("#question").html(myQuestions[4].question);
@@ -274,6 +323,8 @@ function questionPicker() {
             $("#answer2").html(myQuestions[4].answers.b);
             $("#answer3").html(myQuestions[4].answers.c);
             $("#answer4").html(myQuestions[4].answers.d);            
+            currentAnswer = myQuestions[4].correctAnswer;
+            storedAnswer = myQuestions[4].answers[currentAnswer];
             break;
         case 5:
             $("#question").html(myQuestions[5].question);
@@ -281,6 +332,8 @@ function questionPicker() {
             $("#answer2").html(myQuestions[5].answers.b);
             $("#answer3").html(myQuestions[5].answers.c);
             $("#answer4").html(myQuestions[5].answers.d);
+            currentAnswer = myQuestions[5].correctAnswer;
+            storedAnswer = myQuestions[5].answers[currentAnswer];
             break;
         case 6:
             $("#question").html(myQuestions[6].question);
@@ -288,6 +341,8 @@ function questionPicker() {
             $("#answer2").html(myQuestions[6].answers.b);
             $("#answer3").html(myQuestions[6].answers.c);
             $("#answer4").html(myQuestions[6].answers.d);
+            currentAnswer = myQuestions[6].correctAnswer;
+            storedAnswer = myQuestions[6].answers[currentAnswer];
             break;
         case 7:
             $("#question").html(myQuestions[7].question);
@@ -295,6 +350,8 @@ function questionPicker() {
             $("#answer2").html(myQuestions[7].answers.b);
             $("#answer3").html(myQuestions[7].answers.c);
             $("#answer4").html(myQuestions[7].answers.d);
+            currentAnswer = myQuestions[7].correctAnswer;
+            storedAnswer = myQuestions[7].answers[currentAnswer];
             break;
         case 8:
             $("#question").html(myQuestions[8].question);
@@ -302,6 +359,8 @@ function questionPicker() {
             $("#answer2").html(myQuestions[8].answers.b);
             $("#answer3").html(myQuestions[8].answers.c);
             $("#answer4").html(myQuestions[8].answers.d);
+            currentAnswer = myQuestions[8].correctAnswer;
+            storedAnswer = myQuestions[8].answers[currentAnswer];
             break;
         case 9:
             $("#question").html(myQuestions[9].question);
@@ -309,6 +368,8 @@ function questionPicker() {
             $("#answer2").html(myQuestions[9].answers.b);
             $("#answer3").html(myQuestions[9].answers.c);
             $("#answer4").html(myQuestions[9].answers.d);
+            currentAnswer = myQuestions[9].correctAnswer;
+            storedAnswer = myQuestions[9].answers[currentAnswer];
             break;
     }
     startCountdown();
@@ -316,14 +377,37 @@ function questionPicker() {
 
 // Page-States ////
 // On event, changes the html of targetMainContent to timesUp screen.
+function gameRestart() {
+    console.log("gameRestart function called");
+    targetMainContent.html(
+        '<div class="mb-4">' +
+            '<h2>Welcome to the, "No Time to THINK!" trivia game!</h2>' +
+        '</div>' +
+        '<div class="text-left ml-5 mb-4">' +
+            '<h3>The rules are simple:</h3>' +
+        '</div>' +
+        '<div>' +
+            '<ul class="text-left ml-2">' +
+                '<li><h4>You have 10 SECONDS to answer each question!</h4></li>' +
+                '<li><h4>Click on any of the four possible answers to make your choice!</h4></li>' +
+                '<li><h4>There are a total of 10 questions!</h4></li>' +
+                '<li><h4>That\'s it! Have fun!!!</h4></li>' +
+            '</ul>' +
+        '</div>'
+    );
+    startCountdown();
+} ///FINISHED - gameRestart();
+
+// On event, changes the html of targetMainContent to timesUp screen.
 function timesUp() {
     console.log("timesUp function called");
+    questionScreen = false;
     targetMainContent.html(
-        "<div class='p-5 border border-dark bg-danger'></div>" +
-        "<div class='my-3 p-5 border border-dark bg-warning'>" +
-            "<h1 id='banner'>YOU RAN OUTTA TIME!</h1>" +
-        "</div>" +
-        "<div class='p-5 border border-dark bg-danger'></div>"
+        '<div class="p-5 border border-dark bg-danger"></div>' +
+        '<div class="my-3 p-5 border border-dark bg-warning">' +
+            '<h1 id="banner">YOU RAN OUTTA TIME!</h1>' +
+        '</div>' +
+        '<div class="px-5 py-2 border border-dark bg-danger">' + '<h4>The correct answer was: <br></h4><h3>' + storedAnswer + '</h3></div>'
     );
     shortCountdown();
 } ///FINISHED - timesUp();
@@ -331,6 +415,9 @@ function timesUp() {
 // On event, changes the html of targetMainContent to wrongAnswer screen.
 function wrongAnswer() {
     console.log("wrongAnswer function called");
+    wrong++;
+    usersChoice = "";
+    questionScreen = false;
     targetMainContent.html(
         "<div class='p-5 border border-dark bg-danger'></div>" +
         "<div class='my-3 p-5 border border-dark bg-warning'>" +
@@ -338,11 +425,15 @@ function wrongAnswer() {
         "</div>" +
         "<div class='p-5 border border-dark bg-danger'></div>"
     );
+    shortCountdown();
 } ///FINISHED - wrongAnswer();
 
 // On event, changes the html of targetMainContent to correctAnswer screen.
 function correctAnswer() {
     console.log("correctAnswer function called");
+    correct++;
+    usersChoice = "";
+    questionScreen = false;
     targetMainContent.html(
         "<div class='p-5 border border-dark bg-success'></div>" +
         "<div class='my-3 p-4 border border-dark bg-success'>" +
@@ -350,11 +441,13 @@ function correctAnswer() {
         "</div>" +
         "<div class='p-5 border border-dark bg-success'></div>"
     );
+    shortCountdown();
 } ///FINISHED - correctAnswer();
 
 // On event, changes the html of targetMainContent to nextQuestion screen.
 function nextQuestion() {
     console.log("nextQuestion function called");
+    questionScreen = true;
     targetMainContent.html(
         '<div class="row">' +
             '<h4 id="question" class="col-12 mb-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua?</h4>' +
@@ -370,12 +463,17 @@ function nextQuestion() {
             '<div id="answer4" class="col-sm-12 col-lg-5 border border-warning text-white bg-dark d-inline-block p-5 mx-auto m-2">Answer 4</div>' +
         '</div>'
     );
+    questionEnable();
     questionPicker();
 } ///FINISHED - nextQuestion();
 
 // On event, changes the html of targetMainCotent to finalScore screen.
 function finalScore() {
     console.log("finalScore function called");
+    questionScreen = false;
+    targetTimer.html("[ 00:<span id='seconds'>00</span> ]");
+    targetTimer.css("color", "black");
+
     targetMainContent.html(
         '<div class="mb-5"><h1>Final Score:</h1></div>' +
         '<div class="mb-4"><h2><span id="correctAnswers">__</span> Correct Answers.</h2></div>' +
@@ -384,6 +482,10 @@ function finalScore() {
     )
     $("#correctAnswers").html(correct);
     $("#wrongAnswers").html(wrong);
+
+    $("#restart").css("cursor", "pointer");
+
+    restartGame();
 
 } ///FINISHED - finalScore();
 
@@ -400,7 +502,12 @@ function consoleClickCheck() {                                            //
         //     console.log("All questions have been asked!");
         // }
         // console.log(randomNumberArr);
-        console.log(randomNumber);
+        console.log("usersChoice: " + usersChoice);
+        console.log("currentAnswer: " + currentAnswer);
+        console.log("storedAnswer: " + storedAnswer);
+        console.log("questionScreen: " + questionScreen);
+        // console.log("correct answers: " + correct);
+        // console.log("wrong answers: " + wrong);
         console.log("-------------------------");   
     })
 } ///function to console.log on each click.                                //
@@ -413,8 +520,5 @@ consoleClickCheck(); // Comment-in this line to use the above function.//
 
 // Main Code Starts Here. ////
 startCountdown();
-
-
-
 
 }); ///$(document).ready(function() {});
