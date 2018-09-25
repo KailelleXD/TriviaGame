@@ -502,10 +502,10 @@ function consoleClickCheck() {                                            //
         //     console.log("All questions have been asked!");
         // }
         // console.log(randomNumberArr);
-        console.log("usersChoice: " + usersChoice);
-        console.log("currentAnswer: " + currentAnswer);
-        console.log("storedAnswer: " + storedAnswer);
-        console.log("questionScreen: " + questionScreen);
+        // console.log("usersChoice: " + usersChoice);
+        // console.log("currentAnswer: " + currentAnswer);
+        // console.log("storedAnswer: " + storedAnswer);
+        // console.log("questionScreen: " + questionScreen);
         // console.log("correct answers: " + correct);
         // console.log("wrong answers: " + wrong);
         console.log("-------------------------");   
