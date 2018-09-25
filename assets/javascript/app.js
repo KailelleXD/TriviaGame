@@ -235,6 +235,7 @@ function restartGame() {
         wrong = 0;
         questionsAsked = 0;
         gameStatus = false;
+        randomNumberArr = [];
         gameRestart();
     });
 } ///FINISHED - resetGame();
@@ -401,6 +402,7 @@ function gameRestart() {
 // On event, changes the html of targetMainContent to timesUp screen.
 function timesUp() {
     console.log("timesUp function called");
+    wrong++;
     questionScreen = false;
     targetMainContent.html(
         '<div class="p-5 border border-dark bg-danger"></div>' +
@@ -448,7 +450,7 @@ function correctAnswer() {
 function nextQuestion() {
     console.log("nextQuestion function called");
     questionScreen = true;
-    targetMainContent.html(
+    $("#mainContent").html(
         '<div class="row">' +
             '<h4 id="question" class="col-12 mb-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua?</h4>' +
         '</div>' +
@@ -511,7 +513,7 @@ function consoleClickCheck() {                                            //
         console.log("-------------------------");   
     })
 } ///function to console.log on each click.                                //
-consoleClickCheck(); // Comment-in this line to use the above function.//
+// consoleClickCheck(); // Comment-in this line to use the above function.//
 //------------------------------------------------------------------------//
 
 ////Diagnostic-tool////
