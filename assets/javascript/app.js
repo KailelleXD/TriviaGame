@@ -114,6 +114,7 @@ const myQuestions = [
 ]; ///Array myQuestions
 
 // Boolean Variables ////
+var gameStatus = false;
 var answer1 = false;
 var answer2 = false;
 var answer3 = false;
@@ -158,7 +159,13 @@ function startCountdown() {
 
         if (countdown < 0 && questionsAsked < 10) {
             clearInterval(intervalId);
-            timesUp();
+            if (gameStatus === false) {
+                gameStatus = true;
+                nextQuestion();
+            } else {
+                timesUp();
+            }
+            
         } else if (countdown < 0 && questionsAsked === 10) {
             clearInterval(intervalId);
             finalScore();
@@ -385,14 +392,15 @@ function finalScore() {
 function consoleClickCheck() {                                            //
     $(document).on("click", function() {
         console.log("Diagnostic-tool----------");
-        clickCount++;
-        console.log("clickCount: " + clickCount);
+        // clickCount++;
+        // console.log("clickCount: " + clickCount);
         // if (questionsAsked < 10) {
         //     questionPicker();
         // } else {
         //     console.log("All questions have been asked!");
         // }
         // console.log(randomNumberArr);
+        console.log(randomNumber);
         console.log("-------------------------");   
     })
 } ///function to console.log on each click.                                //
