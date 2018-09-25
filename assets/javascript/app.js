@@ -136,8 +136,10 @@ targetSeconds = $("#seconds");
 // Function Declarations ////
 // Starts the countdown, updates the display every second, and calls clearInterval if countdown = 0.
 function startCountdown() {
-
-    countdown = 10;
+    targetTimer.css("color", "black");
+    console.log("startCountdown function called");
+    countdown = 10; // Use this for normal game function.
+    // countdown = 1; // Use this for debug.
     targetSeconds.html(countdown);
 
     // intervalId for 10 second countdown.
@@ -151,27 +153,66 @@ function startCountdown() {
         } ///if-else statement
         
         if (countdown <= 0) {
-            clearInterval(intervalId);
             targetTimer.css("color", "red");
-            
         } ///if statement
+
+        if (countdown < 0 && questionsAsked < 10) {
+            clearInterval(intervalId);
+            timesUp();
+        } else if (countdown < 0 && questionsAsked === 10) {
+            clearInterval(intervalId);
+            finalScore();
+        }
 
     }, 1000); ///var intervalId = setInterval(function() {});
 
 } ///FINISHED - startCountdown();
 
+// Starts a short 3 sec. countdown, calls clearInterval if countdown = 0, then calls the nextQuestion(); function.
+function shortCountdown() {
+    console.log("shortCountdown function called");
+    targetTimer.css("color", "black");
+    countdown = 3; // Use this for normal game function.
+    // countdown = 1; // Use this for debug.
+    targetSeconds.html("0" + countdown);
+
+    // intervalId for 10 second countdown.
+    var intervalId = setInterval(function() {
+        countdown--; // decrements the variable countdown.
+
+        if (countdown < 10) {
+            targetSeconds.html("0" + countdown);
+        } else {
+            targetSeconds.html(countdown);
+        } ///if-else statement
+        
+        if (countdown <= 0) {
+            targetTimer.css("color", "red");
+        } ///if statement
+
+        if (countdown < 0) {
+            clearInterval(intervalId);
+            nextQuestion();
+        } ///if statement
+
+    }, 1000); ///var intervalId = setInterval(function() {});
+
+} ///FINISHED - shortCountdown();
+
 // Generates a random number to determine the question for each round.
 function randomInt(max) {
+    console.log("randomInt function called");
     return Math.floor(Math.random() * Math.floor(max));
 } ///FINISHED - var randomNumber = getRandomInt(max);
 
 // Resets the game and all values back to the initial starting conditions.
 function resetGame() {
+    console.log("resetGame function called");
 } ///resetGame();
 
 // Checks to determine if randomInt picked a number that's already been picked.
 function randomIntCheck(num) {
-    console.log("function randomIntCheck has been called");
+    console.log("randomIntCheck function called");
     var randomNumberArrCheck = randomNumberArr.includes(num);
     if (randomNumberArrCheck === true) {
         return true;
@@ -185,6 +226,7 @@ function randomIntCheck(num) {
 
 // Switch statement that displays a random question from the myQuestion Array.
 function questionPicker() {
+    console.log("questionPicker function called");
     do {
         var randomNumber = randomInt(10);
         var randomNumberValue = randomIntCheck(randomNumber);
@@ -192,77 +234,151 @@ function questionPicker() {
     
     switch(randomNumber) {
         case 0:
-            targetQuestion.html(myQuestions[0].question);
-            targetAnswer1.html(myQuestions[0].answers.a);
-            targetAnswer2.html(myQuestions[0].answers.b);
-            targetAnswer3.html(myQuestions[0].answers.c);
-            targetAnswer4.html(myQuestions[0].answers.d);
+            $("#question").html(myQuestions[0].question);
+            $("#answer1").html(myQuestions[0].answers.a);
+            $("#answer2").html(myQuestions[0].answers.b);
+            $("#answer3").html(myQuestions[0].answers.c);
+            $("#answer4").html(myQuestions[0].answers.d);
             break;
         case 1:
-            targetQuestion.html(myQuestions[1].question);
-            targetAnswer1.html(myQuestions[1].answers.a);
-            targetAnswer2.html(myQuestions[1].answers.b);
-            targetAnswer3.html(myQuestions[1].answers.c);
-            targetAnswer4.html(myQuestions[1].answers.d);
+            $("#question").html(myQuestions[1].question);
+            $("#answer1").html(myQuestions[1].answers.a);
+            $("#answer2").html(myQuestions[1].answers.b);
+            $("#answer3").html(myQuestions[1].answers.c);
+            $("#answer4").html(myQuestions[1].answers.d);
             break;
         case 2:
-            targetQuestion.html(myQuestions[2].question);
-            targetAnswer1.html(myQuestions[2].answers.a);
-            targetAnswer2.html(myQuestions[2].answers.b);
-            targetAnswer3.html(myQuestions[2].answers.c);
-            targetAnswer4.html(myQuestions[2].answers.d);
+            $("#question").html(myQuestions[2].question);
+            $("#answer1").html(myQuestions[2].answers.a);
+            $("#answer2").html(myQuestions[2].answers.b);
+            $("#answer3").html(myQuestions[2].answers.c);
+            $("#answer4").html(myQuestions[2].answers.d);
             break;
         case 3:
-            targetQuestion.html(myQuestions[3].question);
-            targetAnswer1.html(myQuestions[3].answers.a);
-            targetAnswer2.html(myQuestions[3].answers.b);
-            targetAnswer3.html(myQuestions[3].answers.c);
-            targetAnswer4.html(myQuestions[3].answers.d);
+            $("#question").html(myQuestions[3].question);
+            $("#answer1").html(myQuestions[3].answers.a);
+            $("#answer2").html(myQuestions[3].answers.b);
+            $("#answer3").html(myQuestions[3].answers.c);
+            $("#answer4").html(myQuestions[3].answers.d);
             break;
         case 4:
-            targetQuestion.html(myQuestions[4].question);
-            targetAnswer1.html(myQuestions[4].answers.a);
-            targetAnswer2.html(myQuestions[4].answers.b);
-            targetAnswer3.html(myQuestions[4].answers.c);
-            targetAnswer4.html(myQuestions[4].answers.d);            
+            $("#question").html(myQuestions[4].question);
+            $("#answer1").html(myQuestions[4].answers.a);
+            $("#answer2").html(myQuestions[4].answers.b);
+            $("#answer3").html(myQuestions[4].answers.c);
+            $("#answer4").html(myQuestions[4].answers.d);            
             break;
         case 5:
-            targetQuestion.html(myQuestions[5].question);
-            targetAnswer1.html(myQuestions[5].answers.a);
-            targetAnswer2.html(myQuestions[5].answers.b);
-            targetAnswer3.html(myQuestions[5].answers.c);
-            targetAnswer4.html(myQuestions[5].answers.d);
+            $("#question").html(myQuestions[5].question);
+            $("#answer1").html(myQuestions[5].answers.a);
+            $("#answer2").html(myQuestions[5].answers.b);
+            $("#answer3").html(myQuestions[5].answers.c);
+            $("#answer4").html(myQuestions[5].answers.d);
             break;
         case 6:
-            targetQuestion.html(myQuestions[6].question);
-            targetAnswer1.html(myQuestions[6].answers.a);
-            targetAnswer2.html(myQuestions[6].answers.b);
-            targetAnswer3.html(myQuestions[6].answers.c);
-            targetAnswer4.html(myQuestions[6].answers.d);
+            $("#question").html(myQuestions[6].question);
+            $("#answer1").html(myQuestions[6].answers.a);
+            $("#answer2").html(myQuestions[6].answers.b);
+            $("#answer3").html(myQuestions[6].answers.c);
+            $("#answer4").html(myQuestions[6].answers.d);
             break;
         case 7:
-            targetQuestion.html(myQuestions[7].question);
-            targetAnswer1.html(myQuestions[7].answers.a);
-            targetAnswer2.html(myQuestions[7].answers.b);
-            targetAnswer3.html(myQuestions[7].answers.c);
-            targetAnswer4.html(myQuestions[7].answers.d);
+            $("#question").html(myQuestions[7].question);
+            $("#answer1").html(myQuestions[7].answers.a);
+            $("#answer2").html(myQuestions[7].answers.b);
+            $("#answer3").html(myQuestions[7].answers.c);
+            $("#answer4").html(myQuestions[7].answers.d);
             break;
         case 8:
-            targetQuestion.html(myQuestions[8].question);
-            targetAnswer1.html(myQuestions[8].answers.a);
-            targetAnswer2.html(myQuestions[8].answers.b);
-            targetAnswer3.html(myQuestions[8].answers.c);
-            targetAnswer4.html(myQuestions[8].answers.d);
+            $("#question").html(myQuestions[8].question);
+            $("#answer1").html(myQuestions[8].answers.a);
+            $("#answer2").html(myQuestions[8].answers.b);
+            $("#answer3").html(myQuestions[8].answers.c);
+            $("#answer4").html(myQuestions[8].answers.d);
             break;
         case 9:
-            targetQuestion.html(myQuestions[9].question);
-            targetAnswer1.html(myQuestions[9].answers.a);
-            targetAnswer2.html(myQuestions[9].answers.b);
-            targetAnswer3.html(myQuestions[9].answers.c);
-            targetAnswer4.html(myQuestions[9].answers.d);
+            $("#question").html(myQuestions[9].question);
+            $("#answer1").html(myQuestions[9].answers.a);
+            $("#answer2").html(myQuestions[9].answers.b);
+            $("#answer3").html(myQuestions[9].answers.c);
+            $("#answer4").html(myQuestions[9].answers.d);
             break;
     }
+    startCountdown();
 } ///FINISHED - questionPicker();
+
+// Page-States ////
+// On event, changes the html of targetMainContent to timesUp screen.
+function timesUp() {
+    console.log("timesUp function called");
+    targetMainContent.html(
+        "<div class='p-5 border border-dark bg-danger'></div>" +
+        "<div class='my-3 p-5 border border-dark bg-warning'>" +
+            "<h1 id='banner'>YOU RAN OUTTA TIME!</h1>" +
+        "</div>" +
+        "<div class='p-5 border border-dark bg-danger'></div>"
+    );
+    shortCountdown();
+} ///FINISHED - timesUp();
+
+// On event, changes the html of targetMainContent to wrongAnswer screen.
+function wrongAnswer() {
+    console.log("wrongAnswer function called");
+    targetMainContent.html(
+        "<div class='p-5 border border-dark bg-danger'></div>" +
+        "<div class='my-3 p-5 border border-dark bg-warning'>" +
+            "<h1 id='banner'>Sorry! Wrong Answer!!!</h1>" +
+        "</div>" +
+        "<div class='p-5 border border-dark bg-danger'></div>"
+    );
+} ///FINISHED - wrongAnswer();
+
+// On event, changes the html of targetMainContent to correctAnswer screen.
+function correctAnswer() {
+    console.log("correctAnswer function called");
+    targetMainContent.html(
+        "<div class='p-5 border border-dark bg-success'></div>" +
+        "<div class='my-3 p-4 border border-dark bg-success'>" +
+            "<h1 id='banner'>Congratulations!<br>You chose the correct answer!</h1>" +
+        "</div>" +
+        "<div class='p-5 border border-dark bg-success'></div>"
+    );
+} ///FINISHED - correctAnswer();
+
+// On event, changes the html of targetMainContent to nextQuestion screen.
+function nextQuestion() {
+    console.log("nextQuestion function called");
+    targetMainContent.html(
+        '<div class="row">' +
+            '<h4 id="question" class="col-12 mb-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua?</h4>' +
+        '</div>' +
+        
+        '<div class="row">' +
+            '<div id="answer1" class="col-sm-12 col-lg-5 border border-warning text-white bg-dark d-inline-block p-5 mx-auto m-2">Answer 1</div>' +
+            '<div id="answer2" class="col-sm-12 col-lg-5 border border-warning text-white bg-dark d-inline-block p-5 mx-auto m-2">Answer 2</div>' +
+        '</div>' +
+        
+        '<div class="row">' +
+            '<div id="answer3" class="col-sm-12 col-lg-5 border border-warning text-white bg-dark d-inline-block p-5 mx-auto m-2">Answer 3</div>' +
+            '<div id="answer4" class="col-sm-12 col-lg-5 border border-warning text-white bg-dark d-inline-block p-5 mx-auto m-2">Answer 4</div>' +
+        '</div>'
+    );
+    questionPicker();
+} ///FINISHED - nextQuestion();
+
+// On event, changes the html of targetMainCotent to finalScore screen.
+function finalScore() {
+    console.log("finalScore function called");
+    targetMainContent.html(
+        '<div class="mb-5"><h1>Final Score:</h1></div>' +
+        '<div class="mb-4"><h2><span id="correctAnswers">__</span> Correct Answers.</h2></div>' +
+        '<div class="mb-5"><h2><span id="wrongAnswers">__</span> Wrong Answers.</h2></div>' +
+        '<div class="d-inline-block border border-dark bg-primary mt-3 pt-3 px-5 py-1"><h3><span id="restart">[ RESTART ]</span></h3></div>'
+    )
+    $("#correctAnswers").html(correct);
+    $("#wrongAnswers").html(wrong);
+
+} ///FINISHED - finalScore();
 
 //------------------------------------------------------------------------//
 //Diagnostic-tools                                                        //
@@ -271,12 +387,12 @@ function consoleClickCheck() {                                            //
         console.log("Diagnostic-tool----------");
         clickCount++;
         console.log("clickCount: " + clickCount);
-        if (questionsAsked < 10) {
-            questionPicker();
-        } else {
-            console.log("All questions have been asked!");
-        }
-        console.log(randomNumberArr);
+        // if (questionsAsked < 10) {
+        //     questionPicker();
+        // } else {
+        //     console.log("All questions have been asked!");
+        // }
+        // console.log(randomNumberArr);
         console.log("-------------------------");   
     })
 } ///function to console.log on each click.                                //

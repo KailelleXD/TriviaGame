@@ -27,3 +27,8 @@ h4 {
 #timer {
     font-family: 'Share Tech Mono', monospace;
 }
+
+#banner {
+    font-size: 250%;
+    font-weight: 800px;
+}
