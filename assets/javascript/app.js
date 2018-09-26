@@ -64,7 +64,7 @@ const myQuestions = [
         correctAnswer: "b"
     },
     { // Question 6 - index[5] ////
-        question: "What item/s are currently sitting on headboard of my bed?",
+        question: "What item/s are currently sitting on the headboard of my bed?",
         answers: {
             a: "Tsum Tsums",
             b: "The book, 'Harry Potter and the Chamber of Secrets.'",
@@ -381,6 +381,12 @@ function questionPicker() {
     startCountdown();
 } ///FINISHED - questionPicker();
 
+function soundEffects() {
+    // if (audioGameStart === true) {
+    //     $("audio#game-start")[0].play();
+    // }
+} /// soundEffects();
+
 
 //-------------////
 // Page-States ////
@@ -519,10 +525,11 @@ function consoleClickCheck() {                                            //
         // console.log("questionScreen: " + questionScreen);
         // console.log("correct answers: " + correct);
         // console.log("wrong answers: " + wrong);
+        $("audio#standard-tick")[0].play();
         console.log("-------------------------");   
     })
 } ///function to console.log on each click.                                //
-// consoleClickCheck(); // Comment-in this line to use the above function.//
+consoleClickCheck(); // Comment-in this line to use the above function.//
 //------------------------------------------------------------------------//
 
 ////Diagnostic-tool////

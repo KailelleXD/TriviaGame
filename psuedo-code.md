@@ -82,14 +82,19 @@ Screens to wireframe:
 
 Next Steps:
 
-Create "page-states" for [(1)Time's Up! (2)Sorry Wrong Answer! (3)Congratulations! (4)Next Question] You chose the correct answer!
+<!-- Create "page-states" for [(1)Time's Up! (2)Sorry Wrong Answer! (3)Congratulations! (4)Next Question] You chose the correct answer!
 create functions to alter DOM of targetMainContent to the specific "page-states" when called.
 Link these page-state function calls to the interval timer and different click events.
 Once basic functionality of game is achieved..
 Create page-states for the final score screen.
 Once that's done if there's time, create a splash screen (on index.html)
 AND THEN change code to call nextQuestion function (page-state)
-test/debug forever.
+test/debug forever. -->
+
+Add audio.
+refactor questionPicker(); function
+  - use a for loop instead of a switch statement.
+    - should allow for a larger set of questions if wanted.
 
 
 -----
