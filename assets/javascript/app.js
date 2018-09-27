@@ -141,7 +141,7 @@ targetSeconds = $("#seconds");
 // Starts the countdown, updates the display every second, and calls clearInterval if countdown = 0.
 function startCountdown() {
     targetTimer.css("color", "black");
-    console.log("startCountdown function called");
+    // console.log("startCountdown function called");
     countdown = 10; // Use this for normal game function.
     // countdown = 1; // Use this for debug.
     $("#seconds").html(countdown);
@@ -192,7 +192,7 @@ function startCountdown() {
 
 // Starts a short 3 sec. countdown, calls clearInterval if countdown = 0, then calls the nextQuestion(); function.
 function shortCountdown() {
-    console.log("shortCountdown function called");
+    // console.log("shortCountdown function called");
     targetTimer.css("color", "black");
     countdown = 3; // Use this for normal game function.
     // countdown = 1; // Use this for debug.
@@ -226,15 +226,15 @@ function shortCountdown() {
 
 // Generates a random number to determine the question for each round.
 function randomInt(max) {
-    console.log("randomInt function called");
+    // console.log("randomInt function called");
     return Math.floor(Math.random() * Math.floor(max));
 } ///FINISHED - var randomNumber = getRandomInt(max);
 
 // Resets the game and all values back to the initial starting conditions.
 function restartGame() {
-    console.log("resetGame function called");
+    // console.log("resetGame function called");
     $("#restart").on("click", function() {
-        console.log("You clicked the reset button!");
+        // console.log("You clicked the reset button!");
         correct = 0;
         wrong = 0;
         questionsAsked = 0;
@@ -246,21 +246,21 @@ function restartGame() {
 
 // Checks to determine if randomInt picked a number that's already been picked.
 function randomIntCheck(num) {
-    console.log("randomIntCheck function called");
+    // console.log("randomIntCheck function called");
     var randomNumberArrCheck = randomNumberArr.includes(num);
     if (randomNumberArrCheck === true) {
         return true;
     } else {
         randomNumberArr.push(num);
         questionsAsked++;
-        console.log("questionsAsked has been incremented to: " + questionsAsked);
+        // console.log("questionsAsked has been incremented to: " + questionsAsked);
         return false;  
     }
 } ///FINISHED - randomIntCheck();
 
 // Enables click-functionality for answers and assigns a corresponding answer letter to usersChoice.
 function questionEnable() {
-    console.log("questionEnable function called");
+    // console.log("questionEnable function called");
 
     $("#answer1, #answer2, #answer3, #answer4").css("cursor", "pointer");
 
@@ -280,104 +280,20 @@ function questionEnable() {
 
 // Switch statement that displays a random question from the myQuestion Array.
 function questionPicker() {
-    console.log("questionPicker function called");
+    // console.log("questionPicker function called");
     do {
-        var randomNumber = randomInt(10);
+        var randomNumber = randomInt(myQuestions.length);
         var randomNumberValue = randomIntCheck(randomNumber);
     } while (randomNumberValue === true && questionsAsked < 10);     
     
-    switch(randomNumber) {
-        case 0:
-            $("#question").html(myQuestions[0].question);
-            $("#answer1").html(myQuestions[0].answers.a);
-            $("#answer2").html(myQuestions[0].answers.b);
-            $("#answer3").html(myQuestions[0].answers.c);
-            $("#answer4").html(myQuestions[0].answers.d);
-            currentAnswer = myQuestions[0].correctAnswer;
-            storedAnswer = myQuestions[0].answers[currentAnswer];
-            break;
-        case 1:
-            $("#question").html(myQuestions[1].question);
-            $("#answer1").html(myQuestions[1].answers.a);
-            $("#answer2").html(myQuestions[1].answers.b);
-            $("#answer3").html(myQuestions[1].answers.c);
-            $("#answer4").html(myQuestions[1].answers.d);
-            currentAnswer = myQuestions[1].correctAnswer;
-            storedAnswer = myQuestions[1].answers[currentAnswer];
-            break;
-        case 2:
-            $("#question").html(myQuestions[2].question);
-            $("#answer1").html(myQuestions[2].answers.a);
-            $("#answer2").html(myQuestions[2].answers.b);
-            $("#answer3").html(myQuestions[2].answers.c);
-            $("#answer4").html(myQuestions[2].answers.d);
-            currentAnswer = myQuestions[2].correctAnswer;
-            storedAnswer = myQuestions[2].answers[currentAnswer];
-            break;
-        case 3:
-            $("#question").html(myQuestions[3].question);
-            $("#answer1").html(myQuestions[3].answers.a);
-            $("#answer2").html(myQuestions[3].answers.b);
-            $("#answer3").html(myQuestions[3].answers.c);
-            $("#answer4").html(myQuestions[3].answers.d);
-            currentAnswer = myQuestions[3].correctAnswer;
-            storedAnswer = myQuestions[3].answers[currentAnswer];
-            break;
-        case 4:
-            $("#question").html(myQuestions[4].question);
-            $("#answer1").html(myQuestions[4].answers.a);
-            $("#answer2").html(myQuestions[4].answers.b);
-            $("#answer3").html(myQuestions[4].answers.c);
-            $("#answer4").html(myQuestions[4].answers.d);            
-            currentAnswer = myQuestions[4].correctAnswer;
-            storedAnswer = myQuestions[4].answers[currentAnswer];
-            break;
-        case 5:
-            $("#question").html(myQuestions[5].question);
-            $("#answer1").html(myQuestions[5].answers.a);
-            $("#answer2").html(myQuestions[5].answers.b);
-            $("#answer3").html(myQuestions[5].answers.c);
-            $("#answer4").html(myQuestions[5].answers.d);
-            currentAnswer = myQuestions[5].correctAnswer;
-            storedAnswer = myQuestions[5].answers[currentAnswer];
-            break;
-        case 6:
-            $("#question").html(myQuestions[6].question);
-            $("#answer1").html(myQuestions[6].answers.a);
-            $("#answer2").html(myQuestions[6].answers.b);
-            $("#answer3").html(myQuestions[6].answers.c);
-            $("#answer4").html(myQuestions[6].answers.d);
-            currentAnswer = myQuestions[6].correctAnswer;
-            storedAnswer = myQuestions[6].answers[currentAnswer];
-            break;
-        case 7:
-            $("#question").html(myQuestions[7].question);
-            $("#answer1").html(myQuestions[7].answers.a);
-            $("#answer2").html(myQuestions[7].answers.b);
-            $("#answer3").html(myQuestions[7].answers.c);
-            $("#answer4").html(myQuestions[7].answers.d);
-            currentAnswer = myQuestions[7].correctAnswer;
-            storedAnswer = myQuestions[7].answers[currentAnswer];
-            break;
-        case 8:
-            $("#question").html(myQuestions[8].question);
-            $("#answer1").html(myQuestions[8].answers.a);
-            $("#answer2").html(myQuestions[8].answers.b);
-            $("#answer3").html(myQuestions[8].answers.c);
-            $("#answer4").html(myQuestions[8].answers.d);
-            currentAnswer = myQuestions[8].correctAnswer;
-            storedAnswer = myQuestions[8].answers[currentAnswer];
-            break;
-        case 9:
-            $("#question").html(myQuestions[9].question);
-            $("#answer1").html(myQuestions[9].answers.a);
-            $("#answer2").html(myQuestions[9].answers.b);
-            $("#answer3").html(myQuestions[9].answers.c);
-            $("#answer4").html(myQuestions[9].answers.d);
-            currentAnswer = myQuestions[9].correctAnswer;
-            storedAnswer = myQuestions[9].answers[currentAnswer];
-            break;
-    }
+    $("#question").html(myQuestions[randomNumber].question);
+    $("#answer1").html(myQuestions[randomNumber].answers.a);
+    $("#answer2").html(myQuestions[randomNumber].answers.b);
+    $("#answer3").html(myQuestions[randomNumber].answers.c);
+    $("#answer4").html(myQuestions[randomNumber].answers.d);
+    currentAnswer = myQuestions[randomNumber].correctAnswer;
+    storedAnswer = myQuestions[randomNumber].answers[currentAnswer];
+        
     startCountdown();
 } ///FINISHED - questionPicker();
 
@@ -394,7 +310,7 @@ function soundEffects() {
 
 // On event, changes the html of targetMainContent to timesUp screen.
 function gameRestart() {
-    console.log("gameRestart function called");
+    // console.log("gameRestart function called");
     targetMainContent.html(
         '<div class="mb-4">' +
             '<h2>Welcome to the, "No Time to THINK!" trivia game!</h2>' +
@@ -416,7 +332,7 @@ function gameRestart() {
 
 // On event, changes the html of targetMainContent to timesUp screen.
 function timesUp() {
-    console.log("timesUp function called");
+    // console.log("timesUp function called");
     wrong++;
     questionScreen = false;
     targetMainContent.html(
@@ -431,7 +347,7 @@ function timesUp() {
 
 // On event, changes the html of targetMainContent to wrongAnswer screen.
 function wrongAnswer() {
-    console.log("wrongAnswer function called");
+    // console.log("wrongAnswer function called");
     wrong++;
     usersChoice = "";
     questionScreen = false;
@@ -447,7 +363,7 @@ function wrongAnswer() {
 
 // On event, changes the html of targetMainContent to correctAnswer screen.
 function correctAnswer() {
-    console.log("correctAnswer function called");
+    // console.log("correctAnswer function called");
     correct++;
     usersChoice = "";
     questionScreen = false;
@@ -463,7 +379,8 @@ function correctAnswer() {
 
 // On event, changes the html of targetMainContent to nextQuestion screen.
 function nextQuestion() {
-    console.log("nextQuestion function called");
+    // console.log("nextQuestion function called");
+    usersChoice = "";
     questionScreen = true;
     $("#mainContent").html(
         '<div class="row">' +
@@ -486,7 +403,7 @@ function nextQuestion() {
 
 // On event, changes the html of targetMainCotent to finalScore screen.
 function finalScore() {
-    console.log("finalScore function called");
+    // console.log("finalScore function called");
     questionScreen = false;
     targetTimer.html("[ 00:<span id='seconds'>00</span> ]");
     targetTimer.css("color", "black");
@@ -496,7 +413,7 @@ function finalScore() {
         '<div class="mb-4"><h2><span id="correctAnswers">__</span> Correct Answers.</h2></div>' +
         '<div class="mb-5"><h2><span id="wrongAnswers">__</span> Wrong Answers.</h2></div>' +
         '<div class="d-inline-block border border-dark bg-primary mt-3 pt-3 px-5 py-1"><h3><span id="restart">[ RESTART ]</span></h3></div>'
-    )
+    );
     $("#correctAnswers").html(correct);
     $("#wrongAnswers").html(wrong);
 
@@ -525,11 +442,11 @@ function consoleClickCheck() {                                            //
         // console.log("questionScreen: " + questionScreen);
         // console.log("correct answers: " + correct);
         // console.log("wrong answers: " + wrong);
-        $("audio#standard-tick")[0].play();
+        // $("audio#standard-tick")[0].play();
         console.log("-------------------------");   
-    })
+    });
 } ///function to console.log on each click.                                //
-consoleClickCheck(); // Comment-in this line to use the above function.//
+// consoleClickCheck(); // Comment-in this line to use the above function.//
 //------------------------------------------------------------------------//
 
 ////Diagnostic-tool////
