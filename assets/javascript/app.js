@@ -167,7 +167,6 @@ function startCountdown() {
             clearInterval(intervalId);
             if (gameStatus === false) {
                 gameStatus = true;
-                $("#game-start")[0].play();
                 nextQuestion();
                 // finalScore(); // Use this to debug ending screen
             } else {
