@@ -120,18 +120,21 @@ var gameStatus = false;
 var questionScreen = false;
 
 // Target IDs ////
-targetTitlePanel = $("#titlePanel");
-targetTitle = $("#title");
 targetMainContent = $("#mainContent");
-targetQuestion = $("#question");
-targetAnswer1 = $("#answer1");
-targetAnswer2 = $("#answer2");
-targetAnswer3 = $("#answer3");
-targetAnswer4 = $("#answer4");
-targetInfoPanel = $("#infoPanel");
-targetInfoTimerPanel = $("#infoTimerPanel");
 targetTimer = $("#timer");
 targetSeconds = $("#seconds");
+
+// Not currently in use.-------------------------
+// targetTitlePanel = $("#titlePanel");
+// targetTitle = $("#title");
+// targetQuestion = $("#question");
+// targetAnswer1 = $("#answer1");
+// targetAnswer2 = $("#answer2");
+// targetAnswer3 = $("#answer3");
+// targetAnswer4 = $("#answer4");
+// targetInfoPanel = $("#infoPanel");
+// targetInfoTimerPanel = $("#infoTimerPanel");
+// -----------------------------------------------
 
 
 //-----------------------////
@@ -164,6 +167,7 @@ function startCountdown() {
             clearInterval(intervalId);
             if (gameStatus === false) {
                 gameStatus = true;
+                $("#game-start")[0].play();
                 nextQuestion();
                 // finalScore(); // Use this to debug ending screen
             } else {
@@ -296,12 +300,6 @@ function questionPicker() {
         
     startCountdown();
 } ///FINISHED - questionPicker();
-
-function soundEffects() {
-    // if (audioGameStart === true) {
-    //     $("audio#game-start")[0].play();
-    // }
-} /// soundEffects();
 
 
 //-------------////
